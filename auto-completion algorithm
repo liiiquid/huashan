@@ -1,0 +1,30 @@
+// auto-completion algorithm for text edit in qml
+
+if(isComplete && _account.cursorPosition > 0 && isRemove )
+                {
+                    console.log("normal modified", _account.cursorPosition, _account.cursorPosition + 1)
+                    _account.remove(_account.cursorPosition, _account.cursorPosition + 1);
+                }
+
+                isRemove = true;
+                isComplete = false;
+                for( var key in AppCfg.historyUser )
+                {
+                    console.log( key.indexOf(_account.text) );
+                    if( key.indexOf(_account.text) == 0 && _account.text != "")
+                    {
+                        isComplete = true;
+                        completePos = _account.cursorPosition;
+                        headpicUrl = AppCfg.programDir + AppCfg.historyUser[key];
+                        currentUser = key;
+                        //_account.select(completePos, currentUser.length);
+                        _account.cursorPosition = completePos;
+                        console.log("FIND:" ,_account.cursorPosition, _account.cursorPosition + 1)
+                        break;
+                    }
+                }
+
+               if(!isComplete)
+                {
+                    headpicUrl = "";
+                }
